@@ -1,0 +1,53 @@
+,Location,Airport,Round.Number,Date,Home.Team,Away.Team,Result,origin,destination
+2,Scotiabank Arena,YYZ,1,19/10/2018 20:00,Toronto Raptors,Boston Celtics,113 - 101,YYZ,DCA
+3,Capital One Arena,DCA,1,20/10/2018 19:00,Washington Wizards,Toronto Raptors,113 - 117,DCA,YYZ
+4,Scotiabank Arena,YYZ,2,26/10/2018 19:30,Toronto Raptors,Dallas Mavericks,116 - 107,YYZ,MKE
+5,Fiserv Forum,MKE,2,29/10/2018 20:00,Milwaukee Bucks,Toronto Raptors,124 - 109,MKE,YYZ
+6,Scotiabank Arena,YYZ,2,30/10/2018 19:30,Toronto Raptors,Philadelphia 76ers,129 - 112,YYZ,PHX
+7,Talking Stick Resort Arena,PHX,3,2/11/2018 22:00,Phoenix Suns,Toronto Raptors,98 - 107,PHX,LAX
+8,Staples Center,LAX,3,4/11/2018 21:30,Los Angeles Lakers,Toronto Raptors,107 - 121,LAX,SLC
+9,Vivint Smart Home Arena,SLC,3,5/11/2018 21:00,Utah Jazz,Toronto Raptors,111 - 124,SLC,SMF
+10,Golden 1 Center,SMF,3,7/11/2018 22:00,Sacramento Kings,Toronto Raptors,105 - 114,SMF,YYZ
+11,Scotiabank Arena,YYZ,4,14/11/2018 19:30,Toronto Raptors,Detroit Pistons,104 - 106,YYZ,BOS
+12,TD Garden,BOS,5,16/11/2018 19:00,Boston Celtics,Toronto Raptors,123 - 116,BOS,ORD
+13,United Center,ORD,5,17/11/2018 20:00,Chicago Bulls,Toronto Raptors,83 - 122,ORD,MCO
+14,Amway Center,MCO,5,20/11/2018 19:00,Orlando Magic,Toronto Raptors,91 - 93,MCO,ATL
+15,State Farm Arena,ATL,5,21/11/2018 19:30,Atlanta Hawks,Toronto Raptors,108 - 124,ATL,YYZ
+16,Scotiabank Arena,YYZ,6,25/11/2018 18:00,Toronto Raptors,Miami Heat,125 - 115,YYZ,MEM
+17,FedExForum,MEM,6,27/11/2018 20:00,Memphis Grizzlies,Toronto Raptors,114 - 122,MEM,YYZ
+18,Scotiabank Arena,YYZ,7,29/11/2018 20:00,Toronto Raptors,Golden State Warriors,131 - 128,YYZ,CLE
+19,Quicken Loans Arena,CLE,7,1/12/2018 20:00,Cleveland Cavaliers,Toronto Raptors,95 - 106,CLE,YYZ
+20,Scotiabank Arena,YYZ,7,5/12/2018 20:00,Toronto Raptors,Philadelphia 76ers,113 - 102,YYZ,JFK
+21,Barclays Center,JFK,8,7/12/2018 19:30,Brooklyn Nets,Toronto Raptors,106 - 105,JFK,YYZ
+22,Scotiabank Arena,YYZ,8,9/12/2018 18:00,Toronto Raptors,Milwaukee Bucks,99 - 104,YYZ,LAX
+23,Staples Center,LAX,8,11/12/2018 22:30,LA Clippers,Toronto Raptors,99 - 123,LAX,OAK
+24,ORACLE Arena,OAK,8,12/12/2018 22:30,Golden State Warriors,Toronto Raptors,93 - 113,OAK,PDX
+25,Moda Center,PDX,9,14/12/2018 22:00,Portland Trail Blazers,Toronto Raptors,128 - 122,PDX,DEN
+26,Pepsi Center,DEN,9,16/12/2018 20:00,Denver Nuggets,Toronto Raptors,95 - 86,DEN,YYZ
+27,Scotiabank Arena,YYZ,10,21/12/2018 19:00,Toronto Raptors,Cleveland Cavaliers,126 - 110,YYZ,PHL
+28,Wells Fargo Center,PHL,10,22/12/2018 19:30,Philadelphia 76ers,Toronto Raptors,126 - 101,PHL,MIA
+29,AmericanAirlines Arena,MIA,10,26/12/2018 19:30,Miami Heat,Toronto Raptors,104 - 106,MIA,MCO
+30,Amway Center,MCO,11,28/12/2018 19:00,Orlando Magic,Toronto Raptors,116 - 87,MCO,YYZ
+31,Scotiabank Arena,YYZ,11,1/1/2019 19:30,Toronto Raptors,Utah Jazz,122 - 116,YYZ,SAT
+32,AT+ACY-T Center,SAT,12,3/1/2019 20:00,San Antonio Spurs,Toronto Raptors,125 - 107,SAT,MKE
+33,Capital One Arena,DCA,13,13/01/2019 13:00,Washington Wizards,Toronto Raptors,138 - 140,DCA,BOS
+34,TD Garden,BOS,13,16/01/2019 20:00,Boston Celtics,Toronto Raptors,117 - 108,BOS,YYZ
+35,Scotiabank Arena,YYZ,14,22/01/2019 19:00,Toronto Raptors,Sacramento Kings,120 - 105,YYZ,IND
+36,Bankers Life Fieldhouse,IND,14,23/01/2019 19:00,Indiana Pacers,Toronto Raptors,110 - 106,IND,IAH
+37,Toyota Center,IAH,15,25/01/2019 20:00,Houston Rockets,Toronto Raptors,121 - 119,IAH,DFW
+38,American Airlines Center,DFW,15,27/01/2019 19:00,Dallas Mavericks,Toronto Raptors,120 - 123,DFW,YYZ
+39,Wells Fargo Center,PHL,16,5/2/2019 20:00,Philadelphia 76ers,Toronto Raptors,107 - 119,PHL,ATL
+40,State Farm Arena,ATL,17,7/2/2019 19:30,Atlanta Hawks,Toronto Raptors,101 - 119,ATL,JFK
+41,Scotiabank Arena,YYZ,19,1/3/2019 20:00,Toronto Raptors,Portland Trail Blazers,119 - 117,YYZ,DTW
+42,Little Caesars Arena,DTW,19,3/3/2019 18:00,Detroit Pistons,Toronto Raptors,112 - 107,DTW,YYZ
+43,Scotiabank Arena,YYZ,19,5/3/2019 20:00,Toronto Raptors,Houston Rockets,95 - 107,YYZ,MSY
+44,Smoothie King Center,MSY,20,8/3/2019 20:00,New Orleans Pelicans,Toronto Raptors,104 - 127,MSY,MIA
+45,AmericanAirlines Arena,MIA,20,10/3/2019 15:30,Miami Heat,Toronto Raptors,104 - 125,MIA,CLE
+46,Scotiabank Arena,YYZ,21,18/03/2019 19:30,Toronto Raptors,New York Knicks,128 - 92,YYZ,OKC
+47,Chesapeake Energy Arena,OKC,21,20/03/2019 21:30,Oklahoma City Thunder,Toronto Raptors,114 - 123,OKC,YYZ
+48,Madison Square Garden,JFK,22,28/03/2019 19:30,New York Knicks,Toronto Raptors,92 - 117,JFK,ORD
+49,United Center,ORD,23,30/03/2019 20:00,Chicago Bulls,Toronto Raptors,101 - 124,ORD,YYZ
+50,Barclays Center,JFK,23,3/4/2019 19:30,Brooklyn Nets,Toronto Raptors,105 - 115,JFK,CLT
+51,Spectrum Center,CLT,24,5/4/2019 19:00,Charlotte Hornets,Toronto Raptors,113 - 111,CLT,YYZ
+52,Scotiabank Arena,YYZ,24,7/4/2019 12:00,Toronto Raptors,Miami Heat,117 - 109,YYZ,MSP
+53,Target Center,MSP,24,9/4/2019 20:00,Minnesota Timberwolves,Toronto Raptors,100 - 120,MSP,YYZ

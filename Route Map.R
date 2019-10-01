@@ -45,4 +45,77 @@ flight_map
 save_plot("flight_map.tiff", flight_map, base_aspect_ratio = 1, 
           dpi=600)
 
-?geom_curve
+
+
+###################  MAPPING THE NBA SEASON    #####################
+library(magrittr)
+
+nba_schedule<- read.csv(("C:/Users/Seth/Documents/nba/NBA_2018_19.csv"), stringsAsFactors = FALSE)
+
+arena_airports<- read.csv("C:/Users/Seth/Documents/nba/Arena_airports.csv")
+
+nba_schedule_2 <- right_join(arena_airports,nba_schedule, by="Location")
+
+View(nba_schedule_2)
+
+Toronto <- nba_schedule_2 %>% filter(Home.Team=="Toronto Raptors"|Away.Team=="Toronto Raptors")
+View(Toronto)
+
+#Create an origin and destination column
+Toronto %<>% mutate(origin=Airport) 
+Toronto %<>%mutate(destination=lead(origin)) #use lead/lag to mutate a new column offset by one
+
+View(Toronto)
+
+Toronto$origin <- as.character(Toronto$origin)
+Toronto$origin <- as.character(Toronto$destination)
+#Replace NA in column with the most frequent value in the column which should be homecourt
+#This ensures a flight home at the end of the season
+
+Toronto$destination[is.na(Toronto$destination)] <- names(which.max(table(Toronto$destination)))
+
+View(Toronto)
+
+#Remove rows where origin is same as destination (no movement)
+Toronto2<- Toronto[!duplicated(Toronto[,c('origin', 'destination')]),]
+
+Toronto3<- Toronto %>% distinct(origin, destination, .keep_all = TRUE)
+Toronto3<- Toronto3 %>% distinct(origin, destination, .keep_all = TRUE)
+
+write.csv(Toronto3, "Toronto.csv")
+Toronto4<- read.csv("C:/Users/Seth/Documents/nba/Toronto.csv")
+
+View(Toronto4)
+
+
+typeof(Toronto$origin)
+typeof(Toronto$destination)
+
+
+#######################  NOW ADD MAP FOR SEASON   ############################
+Toronto_flights<- merge(Toronto4, air_codes, by.x="origin", by.y="aircode")
+Toronto_flights2<- merge(Toronto_flights, air_codes, by.x="destination", by.y="aircode")
+
+
+
+worldmap <- borders("world", colour="#efede1", fill="#efede1") # create a layer of borders
+flight_map<- ggplot() + worldmap + 
+  geom_curve(data=Toronto_flights2, aes(x = long.x, y = lat.x, xend = long.y, yend = lat.y), 
+             col = "#b29e7d", alpha=0.2, size = 0.3, curvature = .2, ncp=1000, lineend="round") + 
+  #geom_point(data=flights2, aes(x = long.x, y = lat.x), col = "#970027") + 
+  #geom_text_repel(data=air_codes, aes(x = long, y = lat, label = air_codes), col = "black", size = 2, segment.color = NA) + 
+  theme(panel.background = element_rect(fill="white"), 
+        axis.line = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank()
+  )
+
+flight_map
+
+save_plot("flight_map.tiff", flight_map, base_aspect_ratio = 1, 
+          dpi=600)
+
+

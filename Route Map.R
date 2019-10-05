@@ -41,6 +41,10 @@ Toronto2<- Toronto[!duplicated(Toronto[,c('origin', 'destination')]),]
 
 Toronto3<- Toronto2 %>% distinct(origin, destination, .keep_all = TRUE)
 
+#For some reason I'm unable to remove the first row using "distinct"
+#Remove the first row using base R
+Toronto3<- Toronto3[-1,]
+
 setwd("C:/Users/AsusW10/Documents/Aviation/NBA")
 
 write.csv(Toronto3, "Toronto.csv")
@@ -59,7 +63,7 @@ library(ggrepel)
 library(cowplot)
 library(maps)
 
-Toronto_flights<- merge(Toronto4, air_codes, by.x="origin", by.y="aircode")
+Toronto_flights<- merge(Toronto3, air_codes, by.x="origin", by.y="aircode")
 Toronto_flights2<- merge(Toronto_flights, air_codes, by.x="destination", by.y="aircode")
 
 

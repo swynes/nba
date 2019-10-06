@@ -158,11 +158,8 @@ gcd <- Vectorize(gcd)
 
 ######################  TEST ON TORONTO DF  #####################
 View(Toronto3)
-na.omit(Toronto3)
+Toronto3<-na.omit(Toronto3)
 Toronto3 %<>% mutate(kg_co2 = carboncalculator(origin,destination))
-
-
-
 
 
 ############ NEW DISTANCE FUNCTION ####################

@@ -1,3 +1,10 @@
+fuel_757<- read.csv("C:/Users/AsusW10/Documents/Aviation/NBA/Fuel_burn_757.csv")
+View(fuel_757)
+
+
+fuel_757 %>% ggplot(aes(x=km, y=kg_co2))+
+  geom_point()+
+  geom_smooth(method="loess")
 
 ############################  CONVERT DEGREES TO RADIANS   #########################
 
@@ -73,8 +80,7 @@ gcd <- function(long1, lat1, long2, lat2) {
 
 
 ############################   CALCULATE CO2 FROM DISTANCE   #####################
-#Note I have changed emissions factors from average for all classes to assuming economy
-#in a system where there are other options as well
+#Multiply
 
 co2calculator <- function(distance) {
   co2e<- if(distance<=463){

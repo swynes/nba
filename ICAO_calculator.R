@@ -1,16 +1,24 @@
-fuel_757<- read.csv("C:/Users/AsusW10/Documents/Aviation/NBA/Fuel_burn_757.csv")
+airport_codes<- read.csv("C:/Users/Seth/Documents/airport_codes.csv", header = TRUE)
+airport_codes <- read.csv("C:/Users/AsusW10/Documents/Aviation/NBA/airport_codes.csv", header=T)
+
+
+fuel<- read.csv("C:/Users/AsusW10/Documents/Aviation/NBA/Fuel_burn_757.csv")
 View(fuel_757)
 
 
-fuel_757 %>% ggplot(aes(x=km, y=kg_co2))+
+fuel %>% ggplot(aes(x=km, y=kg_co2))+
   geom_point()+
   geom_smooth(method="loess")
+
+fit = lm(fuel$kg_co2~fuel_757$km)
+summary(fit)
+
+#A linear model for fuel use (not ideal) is
+# y=12.9419x+7019.63
 
 ############################  CONVERT DEGREES TO RADIANS   #########################
 
 deg2rad <- function(deg) return(deg*pi/180) #Change degrees into radians
-
-
 
 
 
@@ -80,15 +88,17 @@ gcd <- function(long1, lat1, long2, lat2) {
 
 
 ############################   CALCULATE CO2 FROM DISTANCE   #####################
-#Multiply
+#Have included the uplift factor recommended by the ICAO here
+#For trips below 550km add 50km etc.
+#Also added linear formula for fuel burn to CO2 for 557 calculated above
 
 co2calculator <- function(distance) {
-  co2e<- if(distance<=463){
-    distance*0.29832
-  }   else if (distance>463 && distance<3700) {
-    distance*0.1597
-  } else if (distance>=3700) {
-    distance*0.16279
+  co2e<- if(distance<=550){
+    ((distance+50)*12.9419)+7019.63
+  }   else if (distance>550 && distance<5500) {
+    ((distance+100)*12.9419)+7019.63
+  } else if (distance>=5500) {
+    ((distance+125)*12.9419)+7019.63
   } 
   return(co2e)
 }
@@ -125,8 +135,8 @@ carboncalculator <- function(origin, destination) {
 ###  TEST  ###
 carboncalculator("YYZ","YVR")
 
-carboncalculator("YVR","JNB")
-carboncalculator("YVR","CDG")
+carboncalculator("YVR","YNC")
+carboncalculator("YVR","LGW")
 carboncalculator("YVR","HKG")
 
 co2calculator(3028.83)
@@ -143,6 +153,13 @@ co2calc <- Vectorize(co2calc, vectorize.args = "distance")
 carboncalculator <- Vectorize(carboncalculator) 
 
 gcd <- Vectorize(gcd)
+
+
+
+######################  TEST ON TORONTO DF  #####################
+View(Toronto3)
+na.omit(Toronto3)
+Toronto3 %<>% mutate(kg_co2 = carboncalculator(origin,destination))
 
 
 

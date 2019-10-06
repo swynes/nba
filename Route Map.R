@@ -32,6 +32,7 @@ Toronto$origin <- as.character(Toronto$destination)
 
 #Replace NA in column with the most frequent value in the column which should be homecourt
 #This ensures a flight home at the end of the season
+#BUt does not work on my home laptop??!
 Toronto$destination[is.na(Toronto$destination)] <- names(which.max(table(Toronto$destination)))
 
 View(Toronto)
@@ -44,7 +45,7 @@ Toronto3<- Toronto2 %>% distinct(origin, destination, .keep_all = TRUE)
 #For some reason I'm unable to remove the first row using "distinct"
 #Remove the first row using base R
 Toronto3<- Toronto3[-1,]
-
+View(Toronto3)
 setwd("C:/Users/AsusW10/Documents/Aviation/NBA")
 
 write.csv(Toronto3, "Toronto.csv")

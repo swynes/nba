@@ -1,14 +1,17 @@
+library(tidyverse)
+library(magrittr)
+
 airport_codes<- read.csv("C:/Users/Seth/Documents/airport_codes.csv", header = TRUE)
 airport_codes <- read.csv("C:/Users/AsusW10/Documents/Aviation/NBA/airport_codes.csv", header=T)
 
 
 fuel<- read.csv("C:/Users/AsusW10/Documents/Aviation/NBA/Fuel_burn_757.csv")
-View(fuel_757)
+View(fuel)
 
 
 fuel %>% ggplot(aes(x=km, y=kg_co2))+
   geom_point()+
-  geom_smooth(method="loess")
+  geom_smooth(method="lm")
 
 fit = lm(fuel$kg_co2~fuel_757$km)
 summary(fit)
@@ -103,6 +106,33 @@ co2calculator <- function(distance) {
   return(co2e)
 }
 
+
+
+co2calculator <- function(distance) {
+  co2e<- if(distance<=0){           
+    (distance*0)
+  }   else if (distance>0 && distance<=231.5) {  #Use higher fuel burn rate for short flights per ICAO fuel chart
+    (distance+50)*(6822.44/231.5)
+  }   else if (distance>231.5 && distance<=550) {  #Use highest fuel burn rate for this segment of flights, until 550km when uplift factor for distance is applied
+    (distance+50)*(14014.6/463)                   #!!Leaves a jump discontinuity though
+  }   else if (distance>550 && distance<5500) {
+    ((distance+100)*12.9419)+7019.63
+  } else if (distance>=5500) {
+    ((distance+125)*12.9419)+7019.63
+  } 
+  return(co2e)
+}
+
+co2calculator <- Vectorize(co2calculator, vectorize.args = "distance")
+
+
+distance<- c(0,10,50,75,100,181.5,182,200,230,233,300,400,413,500,540,550,560,600,700,800,900,1000)
+test_df<- data.frame(distance)
+
+test_df %<>% mutate(co2=co2calculator(distance))
+View(test_df)
+
+
 ######################   COMBINE ALL FUNCTIONS IN CALCULATOR   #####################
 
 
@@ -138,6 +168,8 @@ carboncalculator("YYZ","YVR")
 carboncalculator("YVR","YNC")
 carboncalculator("YVR","LGW")
 carboncalculator("YVR","HKG")
+carboncalculator("LGW","LHR")
+
 
 co2calculator(3028.83)
 
@@ -147,19 +179,30 @@ co2calculator(10219.38)
 
 #Now use this code to make sure the function can apply to a vector
 #https://community.rstudio.com/t/the-condition-has-length-1-and-only-the-first-element-will-be-used/16737/5
-co2calc <- Vectorize(co2calc, vectorize.args = "distance")
+co2calculator <- Vectorize(co2calculator, vectorize.args = "distance")
 
 #Must do this before using mutate
 carboncalculator <- Vectorize(carboncalculator) 
 
 gcd <- Vectorize(gcd)
 
+#######################  TEST ON FAKE DF    #####################
 
+origin<- c('YVR','SFO','YYZ','LWG')
+
+destination<- c('SFO','YYZ',"LGW","LHR")
+
+test_df2<- data.frame(origin,destination)
+
+test_df2 %<>% mutate(kg_co2 = carboncalculator(origin,destination))
 
 ######################  TEST ON TORONTO DF  #####################
+Toronto4<- read.csv("C:/Users/AsusW10/Documents/Aviation/NBA/Toronto.csv")
+View(Toronto4)
+
 View(Toronto3)
 Toronto3<-na.omit(Toronto3)
-Toronto3 %<>% mutate(kg_co2 = carboncalculator(origin,destination))
+Toronto4 %<>% mutate(kg_co2 = carboncalculator(origin,destination))
 
 
 ############ NEW DISTANCE FUNCTION ####################

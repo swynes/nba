@@ -89,4 +89,38 @@ flight_map
 save_plot("flight_map.tiff", flight_map, base_aspect_ratio = 1, 
           dpi=600)
 
+##################################################################
+###############     TRY TO CLEAN ALL TEAMS AT ONCE   #############
+##################################################################
 
+#First, make a df with all the team names
+
+Teams<-unique(nba_schedule_2$Home.Team)
+
+View(Teams)
+
+#Now make a new df for each Team from the schedule
+#Use sapply or lapply????
+
+
+#Create an origin and destination column
+
+
+
+Toronto %<>% mutate(origin=Airport) 
+Toronto %<>%mutate(destination=lead(origin)) #use lead/lag to mutate a new column offset by one
+
+
+Toronto$origin <- as.character(Toronto$origin)
+Toronto$destination <- as.character(Toronto$destination)
+
+Toronto$destination[is.na(Toronto$destination)] <- names(which.max(table(Toronto$destination))) #Replace NA with most common (home team) so last game of season there is a return trip
+
+#Remove rows where origin is same as destination (no movement)
+Toronto2<- Toronto[!duplicated(Toronto[,c('origin', 'destination')]),]
+
+Toronto3<- Toronto2 %>% distinct(origin, destination, .keep_all = TRUE)
+
+#For some reason I'm unable to remove the first row using "distinct"
+#Remove the first row using base R
+Toronto3<- Toronto3[-1,]

@@ -182,30 +182,14 @@ co2calculator(10219.38)
 co2calculator <- Vectorize(co2calculator, vectorize.args = "distance")
 
 #Must do this before using mutate
-carboncalculator <- Vectorize(carboncalculator) 
-
+carboncalculator <- Vectorize(carboncalculator, vectorize.args=c("origin","destination")) 
+carboncalculator <- Vectorize(carboncalculator) #Have tried this and above to fix code error 
 gcd <- Vectorize(gcd)
-
-#######################  TEST ON FAKE DF    #####################
-
-origin<- c('YVR','SFO','YYZ','LWG')
-
-destination<- c('SFO','YYZ',"LGW","LHR")
-
-test_df2<- data.frame(origin,destination)
-
-test_df2 %<>% mutate(kg_co2 = carboncalculator(origin,destination))
-
-######################  TEST ON TORONTO DF  #####################
-Toronto4<- read.csv("C:/Users/AsusW10/Documents/Aviation/NBA/Toronto.csv")
-View(Toronto4)
-
-View(Toronto3)
-Toronto3<-na.omit(Toronto3)
-Toronto4 %<>% mutate(kg_co2 = carboncalculator(origin,destination))
+deg2rad <- Vectorize(deg2rad)
 
 
 ############ NEW DISTANCE FUNCTION ####################
+
 
 dist_calc <- function(origin, destination) {
   
@@ -259,3 +243,25 @@ dist_calc <- function(origin, destination) {
 }
 
 dist_calc <- Vectorize(dist_calc)
+
+
+
+######################  TEST ON TORONTO DF  #####################
+Toronto4<- read.csv("C:/Users/AsusW10/Documents/Aviation/NBA/Toronto.csv")
+View(Toronto4)
+
+View(Toronto3)
+Toronto3<-na.omit(Toronto3)
+
+#Convert to characters to avoid error code: "Error in Ops.factor(aircode, origin) : level sets of factors are different
+Toronto4$origin<- as.character(Toronto4$origin)
+Toronto4$destination<- as.character(Toronto4$destination)
+
+#Mutate a CO2 column
+Toronto4 %<>% mutate(kg_co2 = carboncalculator(origin,destination))
+
+#Mutate a distance column
+Toronto4 %<>% mutate(km = dist_calc(origin,destination))
+
+
+View(Toronto4)

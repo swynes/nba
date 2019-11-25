@@ -28,7 +28,7 @@ Toronto %<>%mutate(destination=lead(origin)) #use lead/lag to mutate a new colum
 View(Toronto)
 
 Toronto$origin <- as.character(Toronto$origin)
-Toronto$origin <- as.character(Toronto$destination)
+Toronto$destination <- as.character(Toronto$destination)
 
 #Replace NA in column with the most frequent value in the column which should be homecourt
 #This ensures a flight home at the end of the season
